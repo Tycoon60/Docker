@@ -119,3 +119,4 @@ docker network ls сеть
 docker inspect <container id> | grep IPAddress найти адрес контейнера
 docker network create my-network Создать новый bridge
 docker network connect my-network node-1 По умолчанию контейнер находится в bridge, данной командой мы подключили его к ещё одному бриджу и он будет доступен в двух разных подсетях
+docker run -d -p 1234:8080 --dns 8.8.8.8 tomcat Передать dns адрес контейнеру
