@@ -117,4 +117,5 @@ docker-compose -f stack.yml up -d запустит создание контей
 
 docker network ls сеть
 docker inspect <container id> | grep IPAddress найти адрес контейнера
-
+docker network create my-network Создать новый bridge
+docker network connect my-network node-1 По умолчанию контейнер находится в bridge, данной командой мы подключили его к ещё одному бриджу и он будет доступен в двух разных подсетях
