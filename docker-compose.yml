@@ -1,0 +1,25 @@
+version: "3"
+services:
+  api:
+    image: nginx
+    container_name: my-name
+    ports:
+    - 1234:80
+    networks:
+    - myNetworks
+    volumes:
+    - web:/usr/share/nginx/html
+
+#Если нужно создать сеть
+networks:
+  myNetworks:
+    driver: bridge
+
+#Используем ранее созданную сеть
+#networks:
+#  default:
+#    external: true
+#    name: myNetworks
+    
+volumes:
+  web:

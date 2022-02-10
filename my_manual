@@ -1,9 +1,16 @@
-Установка ubuntu 20.04:
+Установка Docker ubuntu 20.04:
 https://docs.docker.com/engine/install/ubuntu/
 apt update && sudo apt-get install ca-certificates curl gnupg lsb-release
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null 
 sudo apt-get update && apt install -y docker-ce docker-ce-cli containerd.io
+
+Установка docer compose:
+sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+docker-compose --version
+
+
 
 Docker Engine - установленный на ПК Docker.
 Docker Container - работающий контейнер.
@@ -59,11 +66,12 @@ docker exec -w /root my-mongo pwd выполнить команду pwd в ра�
 
 Пимер запуска контейнера: docker run --name my-mongo -d mongo #Скачать с хаба образ mongo, если он есть, запустить в фоновом режиме (-d) с названием my-mongo
 
-Создать контейнер и примонтировать папку с локального ПК на контейнер: docker run -d -p 1234:80 -v /root/bd:/var/www/html/ test:v1
+Создать контейнер и примонтировать папку с локального ПК на контейнер(bind mounts): docker run -d -p 1234:80 -v /root/bd:/var/www/html/ test:v1
 Второй способ монтирование папок:
 docker volume ls #просмотреть добавленные папки
 docker volume create web # создать надстройку
 docker run -d -p 1234:80 --rm --name web -v web:/var/www/html/ test:v1
+docker run --name my-website -d -v web:/usr/share/nginx/html -p 1234:80 nginx Подключили ранее созданный volume web, подключили его, пробросили порты
 Файлы которые используют надстройку монтирования volume хранятся тут: /var/lib/docker/volumes/
 Т.е. например если контейнер был создан с пуствой БД, в процессе работы в БД появились данный и далее контейнер удалили то файл бд с последними данными будет в /var/lib/docker/volumes/ на локальной машине.
 
@@ -120,3 +128,8 @@ docker inspect <container id> | grep IPAddress найти адрес конте�
 docker network create my-network Создать новый bridge
 docker network connect my-network node-1 По умолчанию контейнер находится в bridge, данной командой мы подключили его к ещё одному бриджу и он будет доступен в двух разных подсетях
 docker run -d -p 1234:8080 --dns 8.8.8.8 tomcat Передать dns адрес контейнеру
+
+Копирование с локальной машины в контейнер и обратно:
+docker cp /home/tycoon/test NameContainer:/home/
+docker cp NameContainer:/home /home/tycoon/test
+
