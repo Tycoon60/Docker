@@ -11,7 +11,6 @@ sudo chmod +x /usr/local/bin/docker-compose
 docker-compose --version
 
 
-
 Docker Engine - установленный на ПК Docker.
 Docker Container - работающий контейнер.
 Docker Image - образ, с которого будет запускатся контейнер.
@@ -136,3 +135,9 @@ docker run -d -p 1234:8080 --dns 8.8.8.8 tomcat Передать dns адрес 
 docker cp /home/tycoon/test NameContainer:/home/
 docker cp NameContainer:/home /home/tycoon/test
 
+docker swarm init, если нужно указать ip конкретного интерфейса то нужно добавить ключ --advertise-addr 10.11.10.1. Команда создает токен для подключения к себе сервера в качестве worker
+docker swarm join-token manager получить токен для подключения другого сервера к этому как менеджер. Сервер к которому подключаются менеджеры является лидером.
+docker node ls посмотреть состояние кластера (только на нодах-менеджерах)
+Все swarm команды выполняются только на менеджерах.
+docker swarm leave вывести ноду из кластера, выполняется на той ноде, которую надо вывести.
+docker node rm fdgdsgdfgkjhy6546sf убрать из списка (docker node ls) не актуальную сессию. 
