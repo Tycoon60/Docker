@@ -152,5 +152,11 @@ docker service update redis --image=redis:3.0.2 обновить образ в �
 
 docker secret create my_pass sec.txt создать сикрет
 dokcer secret ls просмотреть созданные секреты
-docker service create --secret my_pass --name redis redis Создали сервис и передали в него сикрет my_pass
+docker service create --secret my_pass --name redis redis Создали сервис и передали в него сикрет my_pass, в контейнере он будет смонтирован
+поумолчанию в /run/secrets/my_pass
+
+docker config create my_conf conf.txt создать конфиг
+docker config ls просмотреть созданные конфиги
+docker service create --config my_pass --name redis redis, Создали сервис и передали в него конфиг my_conf, в контейнере он будет смонтирован
+поумолчанию в /run/config/my_conf  
 
