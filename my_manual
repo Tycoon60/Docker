@@ -141,3 +141,16 @@ docker node ls посмотреть состояние кластера (тол�
 Все swarm команды выполняются только на менеджерах.
 docker swarm leave вывести ноду из кластера, выполняется на той ноде, которую надо вывести.
 docker node rm fdgdsgdfgkjhy6546sf убрать из списка (docker node ls) не актуальную сессию. 
+docker service ls просмотреть сервисы
+docker service create --name redis redis запустить сервис
+docker service inspect redis --pretty просмотреть информацию о запущенном сервисе redis
+docker service ps redis просмотреть задачи (task)
+docker service logs просмотреть логи
+docker service rm redis далить сервис
+docker service scale redis=2 запустить два сервиса
+docker service update redis --image=redis:3.0.2 обновить образ в сервисе
+
+docker secret create my_pass sec.txt создать сикрет
+dokcer secret ls просмотреть созданные секреты
+docker service create --secret my_pass --name redis redis Создали сервис и передали в него сикрет my_pass
+
