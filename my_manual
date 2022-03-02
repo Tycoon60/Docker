@@ -160,3 +160,9 @@ docker config ls просмотреть созданные конфиги
 docker service create --config my_pass --name redis redis, Создали сервис и передали в него конфиг my_conf, в контейнере он будет смонтирован
 поумолчанию в /run/config/my_conf  
 
+docker registry — это инструмент, хранения и обмена собственными docker образами.
+docker node update server1 --label-add registry=true укажем что на этом сервере всегда будет registry
+
+
+
+
